@@ -1,0 +1,17 @@
+{
+  "name": "web-irc",
+  "description": "STS browser IRC client",
+  "author": "l3thal",
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "2.5.x",
+    "irc": "0.3.x",
+    "socket.io": "0.8.x"
+  },
+  "bin": {
+    "web-irc": "./server.js"
+  },
+  "devDependencies": {
+  },
+  "engine": "node >= 0.4.x"
+}

@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+  <title>SmashTheStack IRC</title>
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="app.css">
+  <link type="text/css" rel="stylesheet" href="js/terminal.css">
+  <link type="text/css" rel="stylesheet" href="js/jquery.terminal.css">
+</head>
+
+<body>
+  <div id="content">
+    <header>
+      <ul class="frames pills"></ul>
+    </header>
+    
+    <div id="frame">
+      <div id="sidebar">
+        <div class="stats">nick count here</div>
+        <div class="nicks"></div>
+      </div>
+      <div class="wrapper">
+        <div id="output">
+          <div id="topic">This channel has no topic set</div>
+          <div id="messages"></div>
+          <div class="gutter"></div>
+        </div>
+      </div>
+      <input id="prime-input" type="text">
+    </div>
+  </div>
+  
+  <div id="connect" class="modal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-body">
+      <form style="display:none" id="connect-form">
+        <input type="text" id="connect-nick" name="nick">
+        <input type="text" disabled="disabled" id="connect-channels" name="channels" value="#social">
+      </form>  
+    </div>
+    <a href="#" style="display:none" class="btn primary"></a>
+  </div>
+  
+  <!-- Mustache templates -->
+  <script id="message-tmpl" type="text/html">
+    {{#sender}}<span class="sender">{{sender}}</span>{{/sender}}
+    <span class="text {{^sender}}no-sender{{/sender}}">{{text}}</span>
+  </script>
+  
+  <script id="tab-tmpl" type="text/html">
+    <a class="name {{type}}">{{text}}</a>
+    {{^isStatus}}
+    <span class="close-frame"></span>
+    {{/isStatus}}
+  </script>
+  
+  <!-- JAVASCRIPT -->
+  
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/jquery-1.7.1.min.js"></script>
+  <script src="js/dterm.js"></script>
+  <script src="js/jquery.mousewheel-min.js"></script>
+  <script src="js/jquery.terminal-0.4.21.js"></script>
+  <script src="js/mustache.js"></script>
+  <script src="js/underscore-min.js"></script>
+  <script src="js/backbone.js"></script>
+  <script src="js/bootstrap/bootstrap-modal.js"></script>
+  <script src="js/util.js"></script>
+  <script src="app.js"></script>
+  <script src="js/modal.js"></script>
+  <script>
+ </script>
+</body>
+</html>

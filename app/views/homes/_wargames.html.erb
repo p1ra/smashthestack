@@ -1,0 +1,26 @@
+<div class="contentleft">
+  <h2>Wargames</h2>
+  <div class="box">
+    <div>
+      <ul>
+        <li>IO &middot; <%= link_to "ONLINE", "http://io.smashthestack.org:84", class: "green" %></li>
+        <li>TUX &middot; <%= link_to "ONLINE", "http://tux.smashthestack.org:86", class: "green" %> </li>
+        <li>APFEL &middot; <%= link_to "ONLINE", "http://apfel.smashthestack.org:83", class: "green" %></li>
+        <li>LOGIC &middot <%= link_to "ONLINE", "http://logic.smashthestack.org:88", class: "green" %></li>
+        <li>BLOWFISH &middot; <%= link_to "ONLINE", "http://blowfish.smashthestack.org:81", class: "green" %></li>
+        <li>BLACKBOX &middot; <%= link_to "ONLINE", "http://blackbox.smashthestack.org:85", class: "green" %></li>
+        <li>AMATERIA &middot; <%= link_to "ONLINE", "http://amateria.smashthestack.org:89", class: "green" %></li>
+        <li>CTF &middot; <%= link_to "OFFLINE", "http://smpctf.com", style: "color:#FF0000" %></li>
+      </ul>
+    </div>
+  </div>
+  <h2>Affiliates</h2> 
+  <div class="box4">
+    <div>
+      <%= image_tag(@affiliates.first) %>
+    </div>
+    <div>
+      <%= image_tag(@affiliates.second) %>
+    </div>
+  </div>
+</div>

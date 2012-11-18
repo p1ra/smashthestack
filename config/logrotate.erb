@@ -1,0 +1,8 @@
+<%= shared_path %>/log/*.log {
+        daily
+        missingok
+        rotate <%= logrotate_days rescue '30' %>
+        compress
+        delaycompress
+        copytruncate
+}

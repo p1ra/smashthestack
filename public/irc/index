@@ -1,0 +1,6 @@
+<style type="text/css">
+  body { background-color: #222222; }
+  iframe { border:0px; width:100%; height:100%;}
+</style>
+<iframe id="client" src="http://localhost:8337"></iframe>
+

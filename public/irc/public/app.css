@@ -1,0 +1,196 @@
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow-y: hidden;
+}
+
+body {
+/*    color: #444; */
+    font-family: courier, monospace;
+}
+
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#content {
+    background-color: #000;
+    padding: 5px;
+    display: none;
+}
+
+header {
+    margin-bottom: 3px;
+}
+
+.frames {
+    background-color: #000;
+    margin: 0;
+}
+
+#frame {
+    background-color: #000;
+    position: relative;
+    width:882px;
+}
+
+#frame .wrapper {
+    background-color: #000;
+    position: relative;
+}
+
+#output {
+    font-size: 14px;
+    position: relative;
+    margin-bottom: 5px;
+    border: 1px solid #888;
+}
+
+#output #topic {
+    position: relative;
+    min-height: 40px;
+    padding: 5px;
+    background-color: #000;
+    color: silver;
+    border-bottom: 1px solid #444;
+    display: block !important;
+    z-index: 2;
+}
+
+#output #messages {
+    position: absolute;
+    padding: 5px;
+    background-color: #000;
+    overflow: auto;
+    z-index: 10;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#frame .gutter {
+    position: absolute;
+    background-color: #000;
+    border-right: 1px solid #888;
+    width: 110px;
+    left: 0;
+    top: 0;
+    height: 100%;
+}
+
+#frame.status .gutter {
+    display: none;
+}
+
+/* Special message types */
+#output .error {
+    background-color: #000;
+    color: red;
+}
+
+#output .sender {
+    display: block;
+    float: left;
+    color: limegreen;
+    width: 100px;
+    text-align: left;
+    padding-left: 20px;
+    z-index: 10;
+}
+
+#output .text {
+    color: silver;
+    display: block;
+    margin-left: 115px;
+    margin-bottom: 4px;
+}
+
+#frame.status .text.no-sender {
+    margin-left: 0;
+}
+
+#sidebar {
+    width: 200px;
+    margin: 0 0 5px 5px;
+    border: 1px solid #888;
+    float: right;
+    position: relative;
+    display: none;
+}
+
+#sidebar .stats {
+    position: relative;
+    top: 0;
+    height: 40px;
+    background-color: yellow;
+    border-bottom: 1px solid #888;
+    display: none;
+}
+
+#sidebar .nicks {
+    position: absolute;
+    color: limegreen;
+    overflow: auto;
+    padding: 5px;
+    background-color: #000;
+    top: 0;
+    /*top: 40px;*/
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width
+}
+
+#prime-input {
+    font-size: 15px;
+    position: relative;
+    background-color:black;
+    color: limegreen;
+    width: 99%;
+    bottom: 0;
+}
+/* Twitter Bootstrap overrides
+----------------------------------------------------------------------*/
+.modal { height:350px; width:537px; top:284px; ;border: 1px solid #aaa;padding:10px !important;background-color: black;}
+.modal-backdrop{background-color:#000;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10000;}.modal-backdrop.fade{opacity:0;}
+.modal-backdrop,.modal-backdrop.fade.in{filter:alpha(opacity=100);-khtml-opacity:1;-moz-opacity:1;opacity:1;}}
+.pills > li { margin-right: 6px; }
+.pills > li > * { float: left; }
+.pills .active a { background-color: black; color: limegreen}
+.pills > li > a, .btn.primary {
+    cursor: pointer;
+    background: #000;
+    padding: 0 12px;
+    margin: 0 1px 0 0;
+    border-radius: 3px;
+    line-height: 26px;
+}
+a { color: #fff; }
+.pills > li > a.channel,
+.pills > li > a.pm {
+    border-radius: 3px 0 0 3px;
+}
+
+.pills > li > .close-frame {
+    cursor: pointer;
+    background: black url(images/close.png) no-repeat center center;
+    color: black;
+    width: 18px;
+    height: 26px;
+    border-radius: 0 3px 3px 0;
+}
+
+.pills .active .close-frame {
+    background-color: black;/* #0069d6; */
+}
+
+.pills > li:hover > a,
+.pills > li:hover > .close-frame {
+    color: black;
+    text-shadow: 0;
+    background-color: limegreen;
+}

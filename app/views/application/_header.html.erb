@@ -1,0 +1,21 @@
+<div id="header">
+  <%= link_to image_tag('logo.gif', id: 'logo'), root_path %>
+</div>
+
+<div id="navigation">
+  <ul>
+    <li><%= link_to "main", root_path %></li>
+    <li><%= link_to "wargames", wargames_path %></li>
+    <li><%= link_to "WebSSH", "https://xterm.smashthestack.org" %></li>
+    <li><%= link_to "IRC", "/irc" %></li>
+    <li><%= link_to "FAQ", "/faq" %></li>
+    <li>
+      <% if signed_in? %>
+      <%= link_to "logout", destroy_user_session_path %>
+      <% else %>
+      <%= link_to "login", new_user_session_path %>
+      <% end %>
+    </li>
+  </ul>
+  <span style="float:right; padding-right:10px;" class="green">Welcome<%= signed_in? ? ", #{current_user.username}!" : "!" %></span>
+</div>
