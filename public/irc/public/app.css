@@ -55,7 +55,6 @@ header {
     padding: 5px;
     background-color: #000;
     color: silver;
-    border-bottom: 1px solid #444;
     display: block !important;
     z-index: 2;
 }

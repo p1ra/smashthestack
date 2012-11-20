@@ -3,6 +3,7 @@ Smashthestack::Application.routes.draw do
   root to: "homes#show"
   resource :homes
   match '/faq', to: 'homes#faq', as: 'faq'
+  match '/disclaimer', to: 'homes#disclaimer', as: 'disclaimer'
   authenticate do
     match '/irc', to: 'homes#irc', as: 'irc'
     match '/wargames', to: 'wargames#index', as: 'wargames'
