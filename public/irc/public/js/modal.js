@@ -41,7 +41,7 @@ $(function() {
             term.set_prompt('root@smashthestack.org:~$ ');
             autoType(term, msg, 200, function() {
                 term.echo("Please enter a nickname:");
-                $('.clipboard').focus();
+                $('.clipboard').focus(); return false;
             });
         },
         keydown: function(e) {
