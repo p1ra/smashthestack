@@ -1,2 +1,2 @@
-#!/bin/bash
-elasticsearch -f -Xmx1g -Xms1g -D es.config=./config/elasticsearch.yml
+!/bin/bash
+elasticsearch -f -D es.config=./config/elasticsearch.yml

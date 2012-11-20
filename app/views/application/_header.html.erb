@@ -5,9 +5,11 @@
 <div id="navigation">
   <ul>
     <li><%= link_to "main", root_path %></li>
+    <% if signed_in? %> 
     <li><%= link_to "wargames", wargames_path %></li>
     <li><%= link_to "WebSSH", "https://xterm.smashthestack.org" %></li>
     <li><%= link_to "IRC", "/irc" %></li>
+    <% end %>
     <li><%= link_to "FAQ", "/faq" %></li>
     <li>
       <% if signed_in? %>
@@ -20,5 +22,5 @@
       <a data-toggle="modal" href="#registration_new">register</a>
     </li>
   </ul>
-  <span style="float:right; padding-right:10px;" class="green">Welcome<%= signed_in? ? ", #{current_user.username}!" : "!" %></span>
+  <span style="float:right; padding-right:10px;" class="green"><%= signed_in? ? "Welcome, #{current_user.username}!" : "Sign up to get started!" %></span>
 </div>
