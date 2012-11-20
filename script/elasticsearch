@@ -1,2 +1,2 @@
-!/bin/bash
+#!/bin/bash
 elasticsearch -f -D es.config=./config/elasticsearch.yml
