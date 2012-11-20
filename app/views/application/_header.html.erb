@@ -13,8 +13,11 @@
       <% if signed_in? %>
       <%= link_to "logout", destroy_user_session_path %>
       <% else %>
-      <%= link_to "login", new_user_session_path %>
+      <a data-toggle="modal" href="#session_new">login</a>
       <% end %>
+    </li>
+    <li>
+      <a data-toggle="modal" href="#registration_new">register</a>
     </li>
   </ul>
   <span style="float:right; padding-right:10px;" class="green">Welcome<%= signed_in? ? ", #{current_user.username}!" : "!" %></span>

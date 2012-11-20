@@ -1,21 +1,18 @@
-<h2>Sign up</h2>
-
+<div style="padding-top:10px" class="modal-header">
+  <h3><%= image_tag('login_header.gif') %></h3>
+</div>
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
-
+  <div class="modal-body">
   <div><%= f.label :username %><br />
-  <%= f.text_field :username %></div>
-
+    <%= f.text_field :username %></div>
   <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
-
+    <%= f.email_field :email %></div>
   <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
-
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.submit "Sign up" %></div>
+    <%= f.password_field :password %></div>
+  <div><%= f.label "Confirm" %><br />
+    <%= f.password_field :password_confirmation %></div>
+  <%= f.submit "Sign up", {style: "float:right;margin: 15px 45px 15px 0px"} %>
+  </div>
+</div>
 <% end %>
-
-<%= render :partial => "devise/shared/links" %>

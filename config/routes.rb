@@ -5,16 +5,15 @@ Smashthestack::Application.routes.draw do
   match '/faq', to: 'homes#faq', as: 'faq'
   authenticate do
     match '/irc', to: 'homes#irc', as: 'irc'
-    resources :wargames do
-      collection do
-        get 'blowfish' 
-        get 'io'
-        get 'tux'
-        get 'amateria'
-        get 'logic'
-        get 'blackbox'
-        get 'apfel'
-      end
+    match '/wargames', to: 'wargames#index', as: 'wargames'
+    namespace :wargames do
+      get 'blowfish' 
+      get 'io'
+      get 'tux'
+      get 'amateria'
+      get 'logic'
+      get 'blackbox'
+      get 'apfel'
     end
     resources :admins
   end

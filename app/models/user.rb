@@ -1,13 +1,12 @@
 class User 
   include Tire::Model::Persistence
   devise :database_authenticatable, :registerable, :recoverable, :rememberable
-  associates :post, :topic
 
   property :remember_created_at,    type: 'date'
   property :reset_password_sent_at, type: 'date'
   property :reset_password_token,   type: 'string', index: 'not_analyzed'
   property :encrypted_password,     type: 'string', index: 'not_analyzed'
-  property :username,                   type: 'string', index: 'not_analyzed'
+  property :username,               type: 'string', index: 'not_analyzed'
   property :email,                  type: 'string', index: 'not_analyzed'
   property :created_at,             type: 'date',   default: Proc.new{ Time.now }
   property :role,                   type: 'string', index: 'not_analyzed', default: 'user'

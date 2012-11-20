@@ -12,5 +12,11 @@
     <%= yield %>
     <%= render partial: "footer" %>
   </div>
+  <div id="session_new" class="modal fade in" style="display:none">
+    <%= render template: "devise/sessions/new" %>
+  </div> 
+  <div id="registration_new" class="modal fade in" style="display:none">
+    <%= render template: "devise/registrations/new" %>
+  </div>  
 </body>
 </html>
