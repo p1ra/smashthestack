@@ -1,0 +1,19 @@
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name), id: 'login', remote: true, format: :json) do |f| %>
+  <%= devise_error_messages! %>
+    <div class="inputs"><%= f.label :email %><br />
+      <%= f.email_field :email %></div>
+    <div class="inputs"><%= f.label :password %><br />
+      <%= f.password_field :password %></div>
+  <%= f.submit "Sign in", {id: 'submit', style: "float:right;margin: 15px 45px 15px 0px"} %>
+<% end %>
+<script>
+$('#submit').click(function(){
+  $('form').bind("ajax:success", function(event, data, status, xhr) {
+    if (!data.error) {
+     window.location.href = data.location;
+    } else {      
+      $('.modal-header').html(data.error).attr("style", "font-size:26px;padding-top:15px;height:32px;color:red;");
+    }
+  });
+});
+</script>

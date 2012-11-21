@@ -12,11 +12,18 @@
     <%= yield %>
     <%= render partial: "footer" %>
   </div>
-  <div id="session_new" class="modal fade in" style="display:none">
-    <%= render template: "devise/sessions/new" %>
-  </div> 
-  <div id="registration_new" class="modal fade in" style="display:none">
-    <%= render template: "devise/registrations/new" %>
-  </div>  
+  
+  <div id="modal" class="modal hide fade in">
+    <div style="padding-top:10px" class="modal-header">
+      <h3><%= image_tag('login_header.gif') %></h3>
+    </div>
+    <div class="modal-body"></div>
+  </div>
+  <div id="register_modal" class="modal hide fade in">
+    <div style="padding-top:10px" class="modal-header">
+      <h3><%= image_tag('login_header.gif') %></h3>
+    </div>
+    <div class="modal-body"></div>
+  </div>
 </body>
 </html>

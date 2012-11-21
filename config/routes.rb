@@ -1,5 +1,5 @@
 Smashthestack::Application.routes.draw do
-  devise_for :users, path: '', path_names: {sign_in: 'login', sign_out: 'logout', sign_up: 'register'}, sign_out_via: [:post, :delete, :get]
+  devise_for :users, path: '', controllers: { sessions: 'sessions', registrations: 'registrations' }, path_names: {sign_in: 'login', sign_out: 'logout', sign_up: 'register'}, sign_out_via: [:post, :delete, :get]
   root to: "homes#show"
   resource :homes
   match '/faq', to: 'homes#faq', as: 'faq'

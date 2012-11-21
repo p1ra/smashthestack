@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 gem 'curb'
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.6'
 gem 'jquery-rails'
 gem 'rest-client'
 gem 'devise'

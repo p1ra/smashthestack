@@ -1,18 +1,24 @@
-<div style="padding-top:10px" class="modal-header">
-  <h3><%= image_tag('login_header.gif') %></h3>
-</div>
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name),  id: 'register', remote: true, format: :json) do |f| %>
   <%= devise_error_messages! %>
-  <div class="modal-body">
-  <div><%= f.label :username %><br />
+   <div class="inputs"><%= f.label :username %><br />
     <%= f.text_field :username %></div>
-  <div><%= f.label :email %><br />
+   <div class="inputs"><%= f.label :email %><br />
     <%= f.email_field :email %></div>
-  <div><%= f.label :password %><br />
+   <div class="inputs"><%= f.label :password %><br />
     <%= f.password_field :password %></div>
-  <div><%= f.label "Confirm" %><br />
+   <div class="inputs"><%= f.label "Confirm" %><br />
     <%= f.password_field :password_confirmation %></div>
-  <%= f.submit "Sign up", {style: "float:right;margin: 15px 45px 15px 0px"} %>
+  <%= f.submit "Sign up", {id: 'submit', style: "float:right;margin: 15px 45px 15px 0px"} %>
   </div>
-</div>
 <% end %>
+<script>
+$('#submit').click(function(){
+  $('form').bind("ajax:success", function(event, data, status, xhr) {
+    if (!data.error) {
+     window.location.href = data.location;
+    } else {      
+      $('.modal-header').html(data.error).attr("style", "font-size:26px;padding-top:15px;height:32px;color:red;");
+    }
+  });
+});
+</script>

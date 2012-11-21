@@ -12,14 +12,16 @@
     <% end %>
     <li><%= link_to "FAQ", "/faq" %></li>
     <li>
-      <% if signed_in? %>
-      <%= link_to "logout", destroy_user_session_path %>
-      <% else %>
-      <a data-toggle="modal" href="#session_new">login</a>
-      <% end %>
+    <% if signed_in? %>
+    <%= link_to "logout", destroy_user_session_path %>
+    <% else %>
+    <%= link_to 'login', new_user_session_path, data: {toggle: "modal", target: "#modal"} %>
     </li>
     <li>
-      <a data-toggle="modal" href="#registration_new">register</a>
+    <%= link_to 'register', new_user_registration_path, data: {toggle: "modal", target: "#register_modal"} %>
+    </li>
+    <% end %>
+    <li>
     </li>
   </ul>
   <span style="float:right; padding-right:10px;" class="green"><%= signed_in? ? "Welcome, #{current_user.username}!" : "Sign up to get started!" %></span>
