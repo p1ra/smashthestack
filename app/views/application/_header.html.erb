@@ -5,12 +5,9 @@
 <div id="navigation">
   <ul>
     <li><%= link_to "main", root_path %></li>
-    <% if signed_in? %> 
     <li><%= link_to "wargames", wargames_path %></li>
-    <li><%= link_to "WebSSH", "https://xterm.smashthestack.org" %></li>
-    <li><%= link_to "IRC", "/irc" %></li>
-    <% end %>
-    <li><%= link_to "FAQ", "/faq" %></li>
+    <li><%= link_to "IRC", irc_path %></li>
+    <li><%= link_to "FAQ", faq_path %></li>
     <li>
     <% if signed_in? %>
     <%= link_to "logout", destroy_user_session_path %>

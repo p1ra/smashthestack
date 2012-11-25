@@ -414,8 +414,8 @@ $(function() {
     var ConnectView = Backbone.View.extend({
         el: $('#connect'),
         events: {
-            'click .btn': 'connect',
-            'keypress': 'connectOnEnter'
+            'click .btn': 'connect'
+            //'keypress': 'connectOnEnter'
         },
 
         initialize: function() {

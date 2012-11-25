@@ -8,17 +8,6 @@
     More than just your average wargaming network. Subscribe to RSS feeds <%= link_to "here", nil %>.
   </div>
   <div class="small box2">
-    <h2>Smash The Stack</h2>
-    <% if user_signed_in? %>
-    <li><%= link_to "Sign out", destroy_user_session_path %></li>
-    <% else %>
-    <li><%= link_to "Sign in", new_user_session_path %></li>
-    <% end %>
-    <ul>
-      <%#= coming soon! %>
-    </ul>
-  </div>  
-  <div class="small box2">
     <h2>FAQ Articles</h2>
     <ul>
       <li><%= link_to "How do I get started?", "/faq#a3" %></li>

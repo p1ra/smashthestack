@@ -3,13 +3,13 @@
   <div class="box">
     <div>
       <ul>
-        <li>IO &middot; <%= link_to "ONLINE", signed_in? ? wargames_io_path : new_user_session_path, data: {target: '#modal', toggle: 'modal'}, class: "green" %></li>
-        <li>TUX &middot; <%= link_to "ONLINE", signed_in? ? wargames_tux_path : new_user_session_path, data: {target: '#modal', toggle: 'modal'}, class: "green" %> </li>
-        <li>APFEL &middot; <%= link_to "ONLINE", signed_in? ? wargames_apfel_path : new_user_session_path, data: {target: '#modal', toggle: 'modal'}, class: "green" %></li>
-        <li>LOGIC &middot <%= link_to "ONLINE", signed_in? ? wargames_logic_path : new_user_session_path, data: {target: '#modal', toggle: 'modal'}, class: "green" %></li>
-        <li>BLOWFISH &middot; <%= link_to "ONLINE", signed_in? ? wargames_blowfish_path : new_user_session_path, data: {target: '#modal', toggle: 'modal'}, class: "green" %></li>
-        <li>BLACKBOX &middot; <%= link_to "ONLINE", signed_in? ? wargames_blackbox_path : new_user_session_path, data: {target: '#modal', toggle: 'modal'}, class: "green" %></li>
-        <li>AMATERIA &middot; <%= link_to "ONLINE", signed_in? ? wargames_amateria_path : new_user_session_path, data: {target: '#modal', toggle: 'modal'}, class: "green" %></li>
+        <li>IO &middot; <%= link_to "ONLINE", wargames_io_path, class: "green" %></li>
+        <li>TUX &middot; <%= link_to "ONLINE", wargames_tux_path, class: "green" %> </li>
+        <li>APFEL &middot; <%= link_to "ONLINE", wargames_apfel_path, class: "green" %></li>
+        <li>LOGIC &middot <%= link_to "ONLINE", wargames_logic_path, class: "green" %></li>
+        <li>BLOWFISH &middot; <%= link_to "ONLINE", wargames_blowfish_path, class: "green" %></li>
+        <li>BLACKBOX &middot; <%= link_to "ONLINE", wargames_blackbox_path, class: "green" %></li>
+        <li>AMATERIA &middot; <%= link_to "ONLINE", wargames_amateria_path, class: "green" %></li>
         <li>CTF &middot; <%= link_to "OFFLINE", "http://smpctf.com", style: "color:#FF0000" %></li>
       </ul>
     </div>
