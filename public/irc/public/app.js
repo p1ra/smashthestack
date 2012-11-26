@@ -144,6 +144,8 @@ $(function() {
 
     	render: function() {
             var context = {
+                time: this.model.get('time'),
+                status: this.model.get('status'),
                 sender: this.model.get('sender'),
                 text: this.model.get('text')
             };
@@ -316,7 +318,6 @@ $(function() {
         },
 
         render: function() {
-            console.log(this.model);
             var self = this;
             var context = {
                 text: this.model.get('name'),
@@ -359,7 +360,6 @@ $(function() {
         // Map common IRC commands to standard (RFC 1459)
         parse: function(text) {
             var command = text.split(' ')[0];
-            console.log(command);
             var revised = '';
             switch (command) {
                 case 'msg':
@@ -392,7 +392,9 @@ $(function() {
                     target: frame.get('name'),
                     message: input
                 });
-                frame.stream.add({sender: irc.me.get('nick'), raw: input});
+                time = new Date().toTimeString().replace(/^(\d{2}:\d{2}).*/, "$1");
+                status = frame.participants.getByNick(irc.me.get('nick')).attributes.opStatus || " ";
+                frame.stream.add({time: time, status: status, sender: irc.me.get('nick'), raw: input});
             }
 
             this.input.val('');
@@ -440,7 +442,7 @@ $(function() {
                 channels = channelInput ? channelInput.split(' ') : [];
             var connectInfo = {
                 nick: $('#connect-nick').val(),
-                server: $('#connect-server').val(),
+                server: 'irc.smashthestack.org',
                 channels: channels
             };
 
@@ -497,7 +499,9 @@ $(function() {
             msg.to !== 'status') return;
         frame = frames.getByName(msg.to);
         if (frame) {
-        	frame.stream.add({sender: msg.from, raw: msg.text});
+            time = new Date().toTimeString().replace(/^(\d{2}:\d{2}).*/, "$1");
+            status = frame.participants.getByNick(msg.from).attributes.opStatus;
+            frame.stream.add({time: time, status: status, sender: msg.from, raw: msg.text});
         }
     });
 
@@ -545,7 +549,7 @@ $(function() {
     // Set topic event
     socket.on('topic', function(data) {
         var channel = frames.getByName(data.channel);
-        channel.set({topic: data.topic});
+        channel.set({topic: ">>> "+data.topic});
         // TODO: Show this was changed by data.nick in the channel stream
     });
 

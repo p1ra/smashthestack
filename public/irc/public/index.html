@@ -21,7 +21,7 @@
       </div>
       <div class="wrapper">
         <div id="output">
-          <div id="topic">This channel has no topic set</div>
+          <div id="topic">> can I has topic?</div>
           <div id="messages"></div>
           <div class="gutter"></div>
         </div>
@@ -34,7 +34,7 @@
     <div class="modal-body">
       <form style="display:none" id="connect-form">
         <input type="text" id="connect-nick" name="nick">
-        <input type="text" disabled="disabled" id="connect-channels" name="channels" value="#social">
+        <input type="text" disabled="disabled" id="connect-channels" name="channels" value="#webirc">
       </form>  
     </div>
     <input type="button" style="visibility:hidden" class="btn primary"></a>
@@ -42,7 +42,8 @@
   
   <!-- Mustache templates -->
   <script id="message-tmpl" type="text/html">
-    {{#sender}}<span class="sender">{{sender}}</span>{{/sender}}
+    {{#time}}<span class="time">{{time}}</span>{{/time}} 
+    {{#sender}}<span class="sender"><{{#status}}<span class="status">{{status}}</span>{{/status}}{{sender}}></span>{{/sender}}
     <span class="text {{^sender}}no-sender{{/sender}}">{{text}}</span>
   </script>
   

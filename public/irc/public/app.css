@@ -94,17 +94,28 @@ header {
 #output .sender {
     display: block;
     float: left;
-    color: limegreen;
-    width: 100px;
+    color: silver;
     text-align: left;
-    padding-left: 20px;
+    padding: 0 10px 0 5px;
+    z-index: 10;
+}
+
+#output .status {
+    color: limegreen;
+}
+
+#output .time {
+    display: block;
+    float: left;
+    color: white;
+    margin-left: 5px;
+    text-align: left;
     z-index: 10;
 }
 
 #output .text {
     color: silver;
     display: block;
-    margin-left: 115px;
     margin-bottom: 4px;
 }
 
