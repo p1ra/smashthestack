@@ -277,7 +277,7 @@ $(function() {
             if (frame.get('type') == 'channel') {
                 this.$('#sidebar').show();
                 frame.get('topic') && this.updateTopic(frame);
-                $('.wrapper').css('margin-right', 205);
+                $('.wrapper').css('margin-right', 135);
                 $('#messages').css('top', $('#topic').outerHeight(true));
             } else {
                 this.$('#sidebar').hide();
