@@ -40,9 +40,9 @@ $(function() {
                 case 'nick':
                     text = this.get('oldNick') + ' is now known as ' + this.get('newNick');
                     break;
-                case 'topic':
-                    text = this.get('nick') + ' changed the topic';
-                    break;
+                // case 'topic':
+                //     text = this.get('nick') + ' changed the topic to ' + this.get('topic');
+                //     break;
             }
             this.set({text: text});
         },
@@ -553,9 +553,10 @@ $(function() {
     socket.on('topic', function(data) {
         var channel = frames.getByName(data.channel);
         channel.set({topic: ">> "+data.topic});
-        var topicMessage = new Message({type: 'topic', nick: data.nick})
-        topicMessage.setText();
-        channel.stream.add(topicMessage);
+        // TODO: fix this :P
+        // var topicMessage = new Message({type: 'topic', nick: data.nick, topic: data.topic})
+        // topicMessage.setText();
+        // channel.stream.add(topicMessage);
     });
 
     // Nick change event

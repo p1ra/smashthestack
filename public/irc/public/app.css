@@ -51,7 +51,6 @@ header {
 
 #output #topic {
     position: relative;
-    min-height: 40px;
     padding: 5px;
     background-color: #000;
     color: silver;
