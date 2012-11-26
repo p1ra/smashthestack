@@ -6,20 +6,8 @@
   <ul>
     <li><%= link_to "main", root_path %></li>
     <li><%= link_to "wargames", wargames_path %></li>
-    <li><%= link_to "IRC", irc_path %></li>
+    <li><%= link_to "IRC > #{session[:channel]}", irc_path %></li>
     <li><%= link_to "FAQ", faq_path %></li>
-    <li>
-    <% if signed_in? %>
-    <%= link_to "logout", destroy_user_session_path %>
-    <% else %>
-    <%= link_to 'login', new_user_session_path, data: {toggle: "modal", target: "#modal"} %>
-    </li>
-    <li>
-    <%= link_to 'register', new_user_registration_path, data: {toggle: "modal", target: "#register_modal"} %>
-    </li>
-    <% end %>
-    <li>
-    </li>
   </ul>
-  <span style="float:right; padding-right:10px;" class="green"><%= signed_in? ? "Welcome, #{current_user.username}!" : "Sign up to get started!" %></span>
+  <span style="float:right; padding-right:10px;" class="green"><%= signed_in? ? "Welcome, #{current_user.username}!" : "Welcome to SmashTheStack!" %></span>
 </div>

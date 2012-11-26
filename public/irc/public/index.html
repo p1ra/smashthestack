@@ -32,9 +32,9 @@
   
   <div id="connect" class="modal" data-backdrop="static" data-keyboard="false">
     <div class="modal-body">
-      <form style="display:none" id="connect-form">
+      <form style="visibility:hidden" id="connect-form">
         <input type="text" id="connect-nick" name="nick">
-        <input type="text" disabled="disabled" id="connect-channels" name="channels" value="#webirc">
+        <input type="text" id="connect-channels" name="channels" value="#webirc">
       </form>  
     </div>
     <input type="button" style="visibility:hidden" class="btn primary"></a>
@@ -69,6 +69,9 @@
   <script src="app.js"></script>
   <script src="js/modal.js"></script>
   <script>
- </script>
+  $(function(){
+      $('#connect-channels').val(window.name)
+  });
+  </script>
 </body>
 </html>

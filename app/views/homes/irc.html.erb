@@ -7,4 +7,9 @@
   overflow:hidden; 
   }
 </style>
-<iframe id="client" src="http://74.207.253.148:8337"></iframe>
+
+<iframe name="<%= session[:channel] || '#webirc'%>" id="client"></iframe>
+<script>
+  document.getElementById('client').src = "http://"+window.location.hostname+":8337";
+</script>
+

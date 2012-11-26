@@ -1,4 +1,6 @@
 class HomesController < ApplicationController
+  skip_before_filter :set_session, only: [:irc]
+
   def show
     @affiliates = get_affiliates
   end
