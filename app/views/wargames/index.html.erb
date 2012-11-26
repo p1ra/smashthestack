@@ -7,96 +7,21 @@
         STATUS
       </div>
       <div id="item-header">
-        ADMIN(S)
+        ADMIN
       </div>
     </div>
+    <% wargames.each do |name, status, port, admin| %>
     <div class="items">
       <div class="item-left" id="item">
-        <%= link_to "IO", wargames_io_path %>
+        <%= link_to name.upcase, url_for("wargames/#{name}") %>
       </div>
-      <div class="online" id="item">
-        ONLINE
-      </div>
-      <div class="item-right" id="item">
-        beach
-      </div>
-    </div>
-    <div class="items">
-      <div class="item-left" id="item">
-        <%= link_to "BLOWFISH", wargames_blowfish_path %>
-      </div>
-      <div class="online" id="item">
-        ONLINE
+      <div class="<%= status %>" id="item">
+        <%= status.upcase %>
       </div>
       <div class="item-right" id="item">
-        l3thal
+        <%= admin %>
       </div>
     </div>
-    <div class="items">
-      <div class="item-left" id="item">
-        <%= link_to "LOGIC", wargames_logic_path %>
-      </div>
-      <div class="online" id="item">
-        ONLINE
-      </div>
-      <div class="item-right" id="item">
-        mh, level
-      </div>
-    </div>
-    <div class="items">
-      <div class="item-left" id="item">
-         <%= link_to "APFEL", wargames_apfel_path %>
-      </div>
-      <div class="online" id="item">
-        ONLINE
-      </div>
-      <div class="item-right" id="item">
-        s0ttle
-      </div>
-    </div>
-    <div class="items">
-      <div class="item-left" id="item">
-         <%= link_to "TUX", wargames_tux_path %>
-      </div>
-      <div class="online" id="item">
-        ONLINE
-      </div>
-      <div class="item-right" id="item">
-        bla
-      </div>
-    </div>
-    <div class="items">
-      <div class="item-left" id="item">
-         <%= link_to "BLACKBOX", wargames_blackbox_path %>
-      </div>
-      <div class="online" id="item">
-        ONLINE
-      </div>
-      <div class="item-right" id="item">
-        calcite
-      </div>
-    </div>
-    <div class="items">
-      <div class="item-left" id="item">
-        CTF
-      </div>
-      <div class="offline" id="item">
-        OFFLINE
-      </div>
-      <div class="item-right" id="item">
-        redsand, magikh0e
-      </div>
-    </div>
-    <div class="items">
-      <div class="item-left" id="item">
-         <%= link_to "AMATERIA", wargames_amateria_path %>
-      </div>
-      <div class="online" id="item">
-        ONLINE
-      </div>
-      <div class="item-right" id="item">
-        kaliman
-      </div>
-    </div>
+    <% end %>
 </div>
 
