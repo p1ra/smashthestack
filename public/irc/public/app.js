@@ -40,6 +40,9 @@ $(function() {
                 case 'nick':
                     text = this.get('oldNick') + ' is now known as ' + this.get('newNick');
                     break;
+                case 'topic':
+                    text = this.get('nick') + ' changed the topic';
+                    break;
             }
             this.set({text: text});
         },
@@ -549,8 +552,10 @@ $(function() {
     // Set topic event
     socket.on('topic', function(data) {
         var channel = frames.getByName(data.channel);
-        channel.set({topic: ">>> "+data.topic});
-        // TODO: Show this was changed by data.nick in the channel stream
+        channel.set({topic: ">> "+data.topic});
+        var topicMessage = new Message({type: 'topic', nick: data.nick})
+        topicMessage.setText();
+        channel.stream.add(topicMessage);
     });
 
     // Nick change event
