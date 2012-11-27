@@ -69,7 +69,7 @@ $(function() {
 
     var Person = Backbone.Model.extend({
         defaults: {
-            opStatus: ' '
+            opStatus: ''
         }
     });
 
@@ -186,8 +186,7 @@ $(function() {
 	    participants.each(function(p) {
 		this.nicks[p.get('opStatus')].push(p.get('nick'));
 	    }, this);
-
-	    this.updateList();
+	    this.updateList();            
         },
 
 	clearNicks: function() {
@@ -197,7 +196,7 @@ $(function() {
         updateList: function() {
 	    var sortedKeys = ["~","&","@","%","+",""];
 	    var sortedNicks = [];
-
+            
 	    for (var key=0; key < sortedKeys.length; key++){
 		var nlist = this.nicks[sortedKeys[key]];
 
@@ -209,13 +208,11 @@ $(function() {
 
 		sortedNicks = sortedNicks.concat(group);
 	    }
-
 	    //this is a temp hack
 	    var tmpNicks = [];
 	    for (var i=0; i<sortedNicks.length; i++) {
 		tmpNicks.push("<div>" + sortedNicks[i] + "</div>");
 	    }
-
             $(this.el).html(tmpNicks.join('\n'));
 	},
 
@@ -420,7 +417,7 @@ $(function() {
                     pm = frames.getByName(msgParts[1]) || new Frame({type: 'pm', name: msgParts[1]});
                     time = new Date().toTimeString().replace(/^(\d{2}:\d{2}).*/, "$1");
                     status = frame.participants.getByNick(irc.me.get('nick')).attributes.opStatus || ' ';
-                    pm.stream.add({time: time, status: ' ', sender: irc.me.get('nick'), raw: msgParts[2]})
+                    pm.stream.add({time: time, status: status, sender: irc.me.get('nick'), raw: msgParts[2]})
                     frames.add(pm);
                 }
             } else {
@@ -432,14 +429,12 @@ $(function() {
                 status = frame.participants.getByNick(irc.me.get('nick')).attributes.opStatus || ' ';
                 frame.stream.add({time: time, status: status, sender: irc.me.get('nick'), raw: input});
             }
-
             this.input.val('');
         },
 
         render: function() {
             // Dynamically assign height
             this.el.show();
-
             $(window).resize(function() {
                 sizeContent($('#frame #output'));
                 sizeContent($('#frame #sidebar'));
@@ -537,7 +532,7 @@ $(function() {
         if (frame) {
             console.log(msg);
             time = new Date().toTimeString().replace(/^(\d{2}:\d{2}).*/, "$1");
-            status = frame.participants.getByNick(msg.from).attributes.opStatus;
+            status = frame.participants.getByNick(msg.from).attributes.opStatus || ' ';
             frame.stream.add({time: time, status: status, sender: msg.from, raw: msg.text});
         }
     });
