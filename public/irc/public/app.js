@@ -162,6 +162,7 @@ $(function() {
     // Nick in the sidebar
     var NickListView = Backbone.View.extend({
         el: $('.nicks'),
+	nicks: {'~':[],'&':[],'@':[],'%':[],'+':[],'':[]},
         initialize: function() {
             _.bindAll(this);
         },
@@ -177,18 +178,47 @@ $(function() {
         },
 
         addOne: function(p) {
-            var text = this.tmpl(p.get('opStatus'), p.get('nick'));
-            $(this.el).append(text);
+	    this.nicks[p.get('opStatus')].push(p.get('nick'));
+	    this.updateList();
         },
 
         addAll: function(participants) {
-            var nicks = [];
-            participants.each(function(p) {
-                var text = this.tmpl(p.get('opStatus'), p.get('nick'));
-                nicks.push(text);
-            }, this);
-            $(this.el).html(nicks.join('\n'));
+	    participants.each(function(p) {
+		this.nicks[p.get('opStatus')].push(p.get('nick'));
+	    }, this);
+
+	    this.updateList();
         },
+
+	clearNicks: function() {
+	    this.nicks = {'~':[],'&':[],'@':[],'%':[],'+':[],'':[]};
+	},
+
+        updateList: function() {
+	    var sortedKeys = ["~","&","@","%","+",""];
+	    var sortedNicks = [];
+
+	    for (var key=0; key < sortedKeys.length; key++){
+		var nlist = this.nicks[sortedKeys[key]];
+
+		var group = [];
+		for (var i=0; i<nlist.length;i++) {
+		    group.push(sortedKeys[key] + nlist[i]);
+		}
+		group.sort();
+
+		sortedNicks = sortedNicks.concat(group);
+	    }
+
+	    //this is a temp hack
+	    var tmpNicks = [];
+	    for (var i=0; i<sortedNicks.length; i++) {
+		tmpNicks.push("<div>" + sortedNicks[i] + "</div>");
+	    }
+
+            $(this.el).html(tmpNicks.join('\n'));
+	},
+
 
         changeNick: function() {
             console.log('Change of nick seen');
@@ -241,12 +271,13 @@ $(function() {
                 this.addMessage(message, false);
             }, this);
 
+	    nickList.clearNicks();
             nickList.addAll(frame.participants);
 
             if (frame.get('type') == 'channel') {
                 this.$('#sidebar').show();
                 frame.get('topic') && this.updateTopic(frame);
-                $('.wrapper').css('margin-right', 148);
+                $('.wrapper').css('margin-right', 135);
                 $('#messages').css('top', $('#topic').outerHeight(true));
             } else {
                 this.$('#sidebar').hide();

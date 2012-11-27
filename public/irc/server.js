@@ -15,7 +15,7 @@ app.configure('development', function() {
 });
 
 app.configure('production', function() {
-    app.listen(12445);
+    app.listen(31337);
 });
 
 app.get('/', function(req, res, next) {

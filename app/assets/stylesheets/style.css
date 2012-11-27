@@ -100,7 +100,6 @@ display:block;
 padding:0 18px;
 font-size:1.0em;
 font-weight:normal;
-text-transform:capitalize;
 text-decoration:none;
 background-color:inherit;
 color: #999999;
@@ -115,6 +114,14 @@ text-decoration:none;
 }
 
 /**************** Content styles ****************/
+
+iframe{
+padding:10px;
+width:860px; 
+height:500px;
+border:none;
+overflow:hidden;
+}
 
 #content{
 float:left;
@@ -132,7 +139,6 @@ padding:20px 0 0 20px;
 
 #content h2{
 display:block;
-margin:0 0 16px 0;
 font-size:1.5em;
 font-weight:bolder;
 letter-spacing:-1px;
@@ -159,9 +165,8 @@ line-height:1.4em;
 
 #subcontent h2{
 display:block;
-margin:0 0 15px 0;
 font-size:1.5em;
-font-weight:normal;
+font-weight:bold;
 text-align:left;
 letter-spacing:-1px;
 color:#80a630;
@@ -234,7 +239,7 @@ background:#000000;
 #item{background:#666666;border-right:1px solid #000; border-bottom:1px solid #000;}
 .item-left{color:#fff;font-weight:bold;}
 .online{color:#80a630;}
-.offline{color:red;}
+.offline{color:red;font-weight:bold}
 .item-right{color:#000;}
 
 .box{
