@@ -69,7 +69,7 @@ $(function() {
 
     var Person = Backbone.Model.extend({
         defaults: {
-            opStatus: ''
+            opStatus: ' '
         }
     });
 
@@ -246,7 +246,7 @@ $(function() {
             if (frame.get('type') == 'channel') {
                 this.$('#sidebar').show();
                 frame.get('topic') && this.updateTopic(frame);
-                $('.wrapper').css('margin-right', 205);
+                $('.wrapper').css('margin-right', 148);
                 $('#messages').css('top', $('#topic').outerHeight(true));
             } else {
                 this.$('#sidebar').hide();
@@ -387,7 +387,9 @@ $(function() {
                 var msgParts = parsed.split(' ');
                 if (msgParts[0].toLowerCase() === 'privmsg') {
                     pm = frames.getByName(msgParts[1]) || new Frame({type: 'pm', name: msgParts[1]});
-                    pm.stream.add({sender: irc.me.get('nick'), raw: msgParts[2]})
+                    time = new Date().toTimeString().replace(/^(\d{2}:\d{2}).*/, "$1");
+                    status = frame.participants.getByNick(irc.me.get('nick')).attributes.opStatus || ' ';
+                    pm.stream.add({time: time, status: ' ', sender: irc.me.get('nick'), raw: msgParts[2]})
                     frames.add(pm);
                 }
             } else {
@@ -396,7 +398,7 @@ $(function() {
                     message: input
                 });
                 time = new Date().toTimeString().replace(/^(\d{2}:\d{2}).*/, "$1");
-                status = frame.participants.getByNick(irc.me.get('nick')).attributes.opStatus || " ";
+                status = frame.participants.getByNick(irc.me.get('nick')).attributes.opStatus || ' ';
                 frame.stream.add({time: time, status: status, sender: irc.me.get('nick'), raw: input});
             }
 
@@ -502,6 +504,7 @@ $(function() {
             msg.to !== 'status') return;
         frame = frames.getByName(msg.to);
         if (frame) {
+            console.log(msg);
             time = new Date().toTimeString().replace(/^(\d{2}:\d{2}).*/, "$1");
             status = frame.participants.getByNick(msg.from).attributes.opStatus;
             frame.stream.add({time: time, status: status, sender: msg.from, raw: msg.text});
@@ -510,7 +513,9 @@ $(function() {
 
     socket.on('pm', function(msg) {
         pm = frames.getByName(msg.nick) || new Frame({type: 'pm', name: msg.nick});
-        pm.stream.add({sender: msg.nick, raw: msg.text})
+        time = new Date().toTimeString().replace(/^(\d{2}:\d{2}).*/, "$1");
+        console.log(msg);
+        pm.stream.add({time: time, status: ' ', sender: msg.nick, raw: msg.text})
         frames.add(pm);
     })
 

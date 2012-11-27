@@ -52,7 +52,7 @@ header {
 #output #topic {
     position: relative;
     padding: 5px;
-    background-color: #000;
+    background-color: blue;
     color: silver;
     display: block !important;
     z-index: 2;
@@ -123,7 +123,7 @@ header {
 }
 
 #sidebar {
-    width: 200px;
+    width: 140px;
     margin: 0 0 5px 5px;
     border: 1px solid #888;
     float: right;
