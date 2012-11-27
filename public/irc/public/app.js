@@ -380,6 +380,8 @@ $(function() {
         el: $('#content'),
         testFrames: $('#sidebar .frames'),
         frameList: $('header .frames'),
+        savedSearch: [],
+        cicleSearch: 0,
 
         initialize: function() {
             frames.bind('add', this.addTab, this);
@@ -416,34 +418,50 @@ $(function() {
             return irc.util.swapCommand(command, revised, text);
         },
 
-        sendInput: function(e) {
-            var frame = irc.frameWindow.focused,
-                input = this.input.val();
+        autocomplete: function() {
+            input = this.input.val();
 
-            // auto-complete nicks
-            if (e.keyCode == 9) {
-                var tokens = input.split(" ");
+            var nickSearch = [];
+            var tokens = input.split(" ");
+
+            if (this.cicleSearch == 0) {
                 var prefix = tokens[tokens.length-1];
-
                 var nlist = nickList.plainNicks();
-                var nick = ''
 
                 for (var i=0; i<nlist.length; i++) {
                     if (nlist[i].indexOf(prefix) == 0) {
-                        nick = nlist[i];
+                        nickSearch.push(nlist[i]);
                     }
                 }
+                this.savedSearch = nickSearch;
+            } else {
+                nickSearch = this.savedSearch;
+            }
 
-                if (nick != '') {
-                    tokens.pop();
-                    tokens.push(nick);
-                    this.input.val(tokens.join(' '));
-                }
+            if (nickSearch.length !== 0) {
+                var nick = nickSearch[this.cicleSearch % nickSearch.length];
+                this.cicleSearch++;
+                tokens[tokens.length-1] = nick;
+                this.input.val(tokens.join(' '));
+            }
+        },
 
+        sendInput: function(e) {
+            // auto-complete nicks if TAB is pressed
+            if (e.keyCode == 9) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.autocomplete();
                 return;
             }
 
+            // reset auto-complete if any other key is pressed
+            this.cicleSearch = 0;
+
             if (e.keyCode != 13) return;
+
+            var frame = irc.frameWindow.focused,
+            input = this.input.val();
 
             if (input.indexOf('/') === 0) {
                 var parsed = this.parse(input.substr(1));
