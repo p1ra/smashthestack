@@ -52,7 +52,7 @@ header {
 #output #topic {
     position: relative;
     padding: 5px;
-    background-color: blue;
+    background-color: #000;
     color: silver;
     display: block !important;
     z-index: 2;
