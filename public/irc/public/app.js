@@ -145,7 +145,7 @@ $(function() {
             this.render();
         },
 
-    	render: function() {
+        render: function() {
             var context = {
                 time: this.model.get('time'),
                 status: this.model.get('status'),
@@ -156,13 +156,13 @@ $(function() {
             $(this.el).addClass(this.model.get('type'))
                       .html(html);
             return this;
-    	}
+        }
     });
 
     // Nick in the sidebar
     var NickListView = Backbone.View.extend({
         el: $('.nicks'),
-	nicks: {'~':[],'&':[],'@':[],'%':[],'+':[],'':[]},
+        nicks: {'~':[],'&':[],'@':[],'%':[],'+':[],'':[]},
         initialize: function() {
             _.bindAll(this);
         },
@@ -178,48 +178,61 @@ $(function() {
         },
 
         addOne: function(p) {
-	    this.nicks[p.get('opStatus')].push(p.get('nick'));
-	    this.updateList();
+            this.nicks[p.get('opStatus')].push(p.get('nick'));
+            this.updateList();
         },
 
         addAll: function(participants) {
-	    participants.each(function(p) {
-		this.nicks[p.get('opStatus')].push(p.get('nick'));
-	    }, this);
-	    this.updateList();            
+            participants.each(function(p) {
+                this.nicks[p.get('opStatus')].push(p.get('nick'));
+            }, this);
+            this.updateList();
         },
 
-	clearNicks: function() {
-	    this.nicks = {'~':[],'&':[],'@':[],'%':[],'+':[],'':[]};
-	},
+        clearNicks: function() {
+            this.nicks = {'~':[],'&':[],'@':[],'%':[],'+':[],'':[]};
+        },
 
         updateList: function() {
-	    var sortedKeys = ["~","&","@","%","+",""];
-	    var sortedNicks = [];
+            var sortedKeys = ["~","&","@","%","+",""];
+            var sortedNicks = [];
             
-	    for (var key=0; key < sortedKeys.length; key++){
-		var nlist = this.nicks[sortedKeys[key]];
+            for (var key=0; key < sortedKeys.length; key++){
+                var nlist = this.nicks[sortedKeys[key]];
 
-		var group = [];
-		for (var i=0; i<nlist.length;i++) {
-		    group.push(sortedKeys[key] + nlist[i]);
-		}
-		group.sort();
+                var group = [];
+                for (var i=0; i<nlist.length;i++) {
+                    group.push(sortedKeys[key] + nlist[i]);
+                }
+                group.sort();
 
-		sortedNicks = sortedNicks.concat(group);
-	    }
-	    //this is a temp hack
-	    var tmpNicks = [];
-	    for (var i=0; i<sortedNicks.length; i++) {
-		tmpNicks.push("<div>" + sortedNicks[i] + "</div>");
-	    }
+                sortedNicks = sortedNicks.concat(group);
+            }
+            //this is a temp hack
+            var tmpNicks = [];
+            for (var i=0; i<sortedNicks.length; i++) {
+                tmpNicks.push("<div>" + sortedNicks[i] + "</div>");
+            }
             $(this.el).html(tmpNicks.join('\n'));
-	},
-
+        },
 
         changeNick: function() {
             console.log('Change of nick seen');
             console.log(arguments);
+        },
+
+        plainNicks: function() {
+            var plainList = [];
+            for (var key=0 in this.nicks){
+                var nlist = this.nicks[key];
+
+                for (var i=0; i<nlist.length;i++) {
+                    plainList.push(nlist[i]);
+                }
+            }
+            plainList.sort();
+
+            return plainList;
         }
         
     });
@@ -234,7 +247,7 @@ $(function() {
             _.bindAll(this);
         },
 
-    	addMessage: function(message, single) {
+        addMessage: function(message, single) {
             // Only do this on single message additions
             if (single) {
                 var position = $('#messages').scrollTop();
@@ -247,7 +260,7 @@ $(function() {
             if (atBottom) {
                 $('#messages').scrollTop(position + 100);
             }
-    	},
+        },
 
         updateTopic: function(channel) {
             this.$('#topic').text(channel.get('topic')).show();
@@ -268,7 +281,7 @@ $(function() {
                 this.addMessage(message, false);
             }, this);
 
-	    nickList.clearNicks();
+            nickList.clearNicks();
             nickList.addAll(frame.participants);
 
             if (frame.get('type') == 'channel') {
@@ -367,6 +380,8 @@ $(function() {
         el: $('#content'),
         testFrames: $('#sidebar .frames'),
         frameList: $('header .frames'),
+        savedSearch: [],
+        cicleSearch: 0,
 
         initialize: function() {
             frames.bind('add', this.addTab, this);
@@ -403,10 +418,50 @@ $(function() {
             return irc.util.swapCommand(command, revised, text);
         },
 
+        autocomplete: function() {
+            input = this.input.val();
+
+            var nickSearch = [];
+            var tokens = input.split(" ");
+
+            if (this.cicleSearch == 0) {
+                var prefix = tokens[tokens.length-1];
+                var nlist = nickList.plainNicks();
+
+                for (var i=0; i<nlist.length; i++) {
+                    if (nlist[i].indexOf(prefix) == 0) {
+                        nickSearch.push(nlist[i]);
+                    }
+                }
+                this.savedSearch = nickSearch;
+            } else {
+                nickSearch = this.savedSearch;
+            }
+
+            if (nickSearch.length !== 0) {
+                var nick = nickSearch[this.cicleSearch % nickSearch.length];
+                this.cicleSearch++;
+                tokens[tokens.length-1] = nick;
+                this.input.val(tokens.join(' '));
+            }
+        },
+
         sendInput: function(e) {
+            // auto-complete nicks if TAB is pressed
+            if (e.keyCode == 9) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.autocomplete();
+                return;
+            }
+
+            // reset auto-complete if any other key is pressed
+            this.cicleSearch = 0;
+
             if (e.keyCode != 13) return;
+
             var frame = irc.frameWindow.focused,
-                input = this.input.val();
+            input = this.input.val();
 
             if (input.indexOf('/') === 0) {
                 var parsed = this.parse(input.substr(1));
