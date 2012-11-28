@@ -405,17 +405,36 @@ $(function() {
 
         // Map common IRC commands to standard (RFC 1459)
         parse: function(text) {
-            var command = text.split(' ')[0];
+            var tokens  = text.split(' ');
+            var command = tokens[0]
             var revised = '';
             switch (command) {
-                case 'msg':
-                    revised = 'privmsg';
-                    break;
-                default:
-                    revised = command;
-                    break;
+            case 'j':
+            case 'join':
+                revised = 'join';
+                //add # if needed
+                if (tokens.length > 1) {
+                    if (tokens[1].indexOf("#") !== 0) {
+                        tokens[1] = '#' + tokens[1];
+                    }
+                }
+                break;
+            case 'part':
+                revised = 'part';
+                //leave current channel
+                if (tokens.length == 1) {
+                    var frame = irc.frameWindow.focused;
+                    tokens.push(frame.get('name'));
+                }
+                break;
+            case 'msg':
+                revised = 'privmsg';
+                break;
+            default:
+                revised = command;
+                break;
             }
-            return irc.util.swapCommand(command, revised, text);
+            return irc.util.swapCommand(command, revised, tokens.join(' '));
         },
 
         autocomplete: function() {
